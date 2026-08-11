@@ -168,7 +168,7 @@ button {
             placeholder="Message Nikku..."
             autocomplete="off"
         >
-        <button onclick="sendMessage()">➤</button>
+        <button id="sendButton" type="button">➤</button>
     </div>
 
 </div>
@@ -185,7 +185,7 @@ input.addEventListener("keypress", function(event) {
     }
 });
 
-sendButton.addEventListener("click", function() {
+sendButton.addEventListener("click", sendMessage);
     sendMessage();
 });
 
@@ -204,11 +204,8 @@ function addMessage(text, type) {
 
 
     async function sendMessage() {
-        if (!puter.auth.isSignedIn()) {
-    await puter.auth.signIn({
-        attempt_temp_user_creation: true
-    });
-}
+        
+
 
     const text = input.value.trim();
 
