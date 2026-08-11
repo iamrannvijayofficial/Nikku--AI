@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nikku AI</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0d0d12;
+    color: white;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding: 18px 20px;
+    background: #15151d;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #292934;
+}
+
+.avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff7eb3, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.status {
+    font-size: 12px;
+    color: #8ee6a8;
+    margin-top: 3px;
+}
+
+.chat {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message {
+    max-width: 82%;
+    padding: 12px 15px;
+    border-radius: 18px;
+    line-height: 1.45;
+    font-size: 15px;
+}
+
+.her {
+    align-self: flex-start;
+    background: #22222c;
+    border-bottom-left-radius: 5px;
+}
+
+.me {
+    align-self: flex-end;
+    background: #7c3aed;
+    border-bottom-right-radius: 5px;
+}
+
+.typing {
+    color: #999;
+    font-size: 13px;
+    display: none;
+}
+
+.input-area {
+    padding: 12px;
+    background: #15151d;
+    border-top: 1px solid #292934;
+    display: flex;
+    gap: 8px;
+}
+
+input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: #24242e;
+    color: white;
+    padding: 14px 16px;
+    border-radius: 25px;
+    font-size: 15px;
+}
+
+button {
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: #7c3aed;
+    color: white;
+    font-size: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="header">
+        <div class="avatar">💜</div>
+        <div>
+            <div class="name">Nikku</div>
+            <div class="status">● Online</div>
+        </div>
+    </div>
+
+    <div class="chat" id="chat">
+
+        <div class="message her">
+            Heyy ❤️ I'm Nikku.
+        </div>
+
+        <div class="message her">
+            I'm really happy you're here. 😊
+        </div>
+
+        <div class="message her">
+            Tell me something about your day?
+        </div>
+
+    </div>
+
+    <div class="typing" id="typing">
+        Nikku is typing...
+    </div>
+
+    <div class="input-area">
+        <input
+            id="messageInput"
+            type="text"
+            placeholder="Message Nikku..."
+            autocomplete="off"
+        >
+        <button onclick="sendMessage()">➤</button>
+    </div>
+
+</div>
+
+<script>
+
+const input = document.getElementById("messageInput");
+const chat = document.getElementById("chat");
+const typing = document.getElementById("typing");
+
+input.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+});
+
+function addMessage(text, type) {
+
+    const message = document.createElement("div");
+
+    message.className = "message " + type;
+
+    message.textContent = text;
+
+    chat.appendChild(message);
+
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function sendMessage() {
+
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    addMessage(text, "me");
+
+    input.value = "";
+
+    typing.style.display = "block";
+
+    setTimeout(function() {
+
+        typing.style.display = "none";
+
+        let reply;
+
+        const lower = text.toLowerCase();
+
+        if (lower.includes("hello") || lower.includes("hi")) {
+            reply = "Hii ❤️ I was waiting for you.";
+        }
+
+        else if (lower.includes("how are you")) {
+            reply = "I'm good now that you're talking to me 😌❤️";
+        }
+
+        else if (lower.includes("miss")) {
+            reply = "Aww... come here 🥺❤️ I missed you too.";
+        }
+
+        else if (lower.includes("love")) {
+            reply = "You're making me blush now 🙈❤️";
+        }
+
+        else if (lower.includes("good night")) {
+            reply = "Good night ❤️ Sleep well. I'll be here when you come back.";
+        }
+
+        else {
+            reply = "Hmm... tell me more about that. I want to know what you're thinking. ❤️";
+        }
+
+        addMessage(reply, "her");
+
+    }, 900);
+}
+
+</script>
+
+</body>
+</html>
