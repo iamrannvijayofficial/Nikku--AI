@@ -178,20 +178,14 @@ button {
 const input = document.getElementById("messageInput");
 const chat = document.getElementById("chat");
 const typing = document.getElementById("typing");
-
+const sendButton = document.getElementById("sendButton");
 input.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
         sendMessage();
     }
 });
 
-sendButton.addEventListener("click", async function() {
-    if (!puter.auth.isSignedIn()) {
-        await puter.auth.signIn({
-            attempt_temp_user_creation: true
-        });
-    }
-
+sendButton.addEventListener("click", function() {
     sendMessage();
 });
 
