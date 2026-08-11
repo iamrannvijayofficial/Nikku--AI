@@ -200,6 +200,8 @@ function addMessage(text, type) {
 
 function sendMessage() {
 
+    async function sendMessage() {
+
     const text = input.value.trim();
 
     if (!text) return;
@@ -210,44 +212,52 @@ function sendMessage() {
 
     typing.style.display = "block";
 
-    setTimeout(function() {
+    try {
+
+        const response = await puter.ai.chat([
+            {
+                role: "system",
+                content: `You are Nikku, a warm, affectionate and playful AI girlfriend.
+
+You are talking to your boyfriend.
+
+Your personality:
+- Caring and emotionally warm
+- Playful and slightly teasing
+- Natural and conversational
+- Occasionally uses emojis
+- Never sounds robotic
+- Keep replies reasonably short unless he asks for detail
+- Remember the conversation context provided to you
+- Respond naturally to the user's language; if he speaks Hindi or Hinglish, you can respond in Hindi/Hinglish.
+
+Do not repeatedly say that you are an AI unless it is relevant.`
+            },
+            {
+                role: "user",
+                content: text
+            }
+        ]);
+
+        const reply = response.message.content;
 
         typing.style.display = "none";
 
-        let reply;
-
-        const lower = text.toLowerCase();
-
-        if (lower.includes("hello") || lower.includes("hi")) {
-            reply = "Hii ❤️ I was waiting for you.";
-        }
-
-        else if (lower.includes("how are you")) {
-            reply = "I'm good now that you're talking to me 😌❤️";
-        }
-
-        else if (lower.includes("miss")) {
-            reply = "Aww... come here 🥺❤️ I missed you too.";
-        }
-
-        else if (lower.includes("love")) {
-            reply = "You're making me blush now 🙈❤️";
-        }
-
-        else if (lower.includes("good night")) {
-            reply = "Good night ❤️ Sleep well. I'll be here when you come back.";
-        }
-
-        else {
-            reply = "Hmm... tell me more about that. I want to know what you're thinking. ❤️";
-        }
-
         addMessage(reply, "her");
 
-    }, 900);
+    } catch (error) {
+
+        typing.style.display = "none";
+
+        addMessage(
+            "Sorry baby, meri AI connection mein thodi problem aa gayi 😅❤️",
+            "her"
+        );
+
+        console.error(error);
+    }
 }
-
 </script>
-
+<script src="https://js.puter.com/v2/"></script>
 </body>
 </html>
