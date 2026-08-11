@@ -91,12 +91,19 @@ body {
     display: none;
 }
 
-.input-area {
+..input-area {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
     padding: 12px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
     background: #15151d;
     border-top: 1px solid #292934;
     display: flex;
     gap: 8px;
+    z-index: 1000;
+}
 }
 
 input {
