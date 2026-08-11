@@ -185,7 +185,15 @@ input.addEventListener("keypress", function(event) {
     }
 });
 
-sendButton.addEventListener("click", sendMessage);
+sendButton.addEventListener("click", async function() {
+    if (!puter.auth.isSignedIn()) {
+        await puter.auth.signIn({
+            attempt_temp_user_creation: true
+        });
+    }
+
+    sendMessage();
+});
 
 function addMessage(text, type) {
 
@@ -202,6 +210,11 @@ function addMessage(text, type) {
 
 
     async function sendMessage() {
+        if (!puter.auth.isSignedIn()) {
+    await puter.auth.signIn({
+        attempt_temp_user_creation: true
+    });
+}
 
     const text = input.value.trim();
 
