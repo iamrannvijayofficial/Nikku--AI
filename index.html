@@ -168,13 +168,13 @@ button {
             placeholder="Message Nikku..."
             autocomplete="off"
         >
-      <button id="sendButton" type="button" onclick="alert('BUTTON CLICK WORKS')">➤</button>
+      <button id="sendButton" type="button">➤</button>
     </div>
 
 </div>
 
 <script>
-alert("JAVASCRIPT LOADED");
+
 const input = document.getElementById("messageInput");
 const chat = document.getElementById("chat");
 const typing = document.getElementById("typing");
@@ -186,8 +186,8 @@ input.addEventListener("keypress", function(event) {
 });
 
 sendButton.addEventListener("click", sendMessage);
-    sendMessage();
-});
+    
+
 
 function addMessage(text, type) {
 
@@ -204,7 +204,7 @@ function addMessage(text, type) {
 
 
     async function sendMessage() {
-        alert("SEND BUTTON WORKING");
+        
 
 
     const text = input.value.trim();
