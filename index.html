@@ -185,7 +185,9 @@ input.addEventListener("keypress", function(event) {
     }
 });
 
-sendButton.addEventListener("click", sendMessage);
+sendButton.addEventListener("click", function () {
+    addMessage(input.value, "me");
+});
     
 
 
